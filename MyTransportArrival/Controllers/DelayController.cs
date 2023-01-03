@@ -2,6 +2,7 @@ namespace MyTransportArrival.Controllers;
 
 using Abstractions.Dto;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
 

@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Stop } from "../entities/Stop";
 import { UserService } from "../services/UserService";
 import { Box, Flex, List, ListItem, SimpleGrid } from "@chakra-ui/react";
 import DelayItem from "./DelayItem";
+import { UserServiceContext } from "../App";
 
 const DelayDashboard = () => {
     const [stops, setStops] = useState<Stop[]>([]);
+    const userService = useContext(UserServiceContext);
     useEffect(() => {
-        UserService.getCurrentUserStops().then((stops) => setStops(stops));
+        userService.getCurrentUserStops().then((stops) => setStops(stops));
     }, []);
 
     return (

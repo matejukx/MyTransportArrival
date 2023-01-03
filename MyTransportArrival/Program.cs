@@ -13,10 +13,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthorization();
+app.UseRouting();
+app.UseCors(config => config
+    .WithOrigins(
+        "http://localhost:3000",
+        "https://localhost:3001").AllowAnyHeader().AllowAnyMethod());
 app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
+
 app.UseSession();
-app.UseCors(config => config.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
 
 app.Run();

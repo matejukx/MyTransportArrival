@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DelayService } from "../services/DelayService";
 import { Stop } from "../entities/Stop";
 import { UserService } from "../services/UserService";
@@ -17,6 +17,7 @@ import {
 import { CircularProgress } from "@chakra-ui/progress";
 import { Delay } from "../entities/Delay";
 import { IconButton } from "@chakra-ui/react";
+import { UserServiceContext } from "../App";
 
 export interface DelayItemProps {
     stop: Stop;
@@ -26,6 +27,7 @@ const DelayItem = (props: DelayItemProps) => {
     const stop = props.stop;
     const [delays, setDelays] = useState<Delay[]>([]);
     const toast = useToast();
+    const userService = useContext(UserServiceContext);
     
     useEffect(() => {
         DelayService.getDelays(stop.stopId).then((delays) =>
@@ -41,7 +43,7 @@ const DelayItem = (props: DelayItemProps) => {
     }, []);
 
     const handleRemoveStop = () => {
-        UserService.removeStop(stop.stopId).then((result) => {
+        userService.removeStop(stop.stopId).then((result) => {
         if (result){
             window.location.reload();
         }

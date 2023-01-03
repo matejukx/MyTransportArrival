@@ -3,23 +3,23 @@ import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { Container, Heading } from "@chakra-ui/layout";
 import { Switch } from "@chakra-ui/switch";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { UserService } from "../services/UserService";
 import { useToast } from "@chakra-ui/react";
+import { UserServiceContext } from "../App";
 
 const LoginForm = () => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [show, setShow] = useState(false);
-
+    const userService = useContext(UserServiceContext);
     const handleClick = () => setShow(!show);
 
     const toast = useToast();
 
     const handleLogin = async () => {
-        const result = await UserService.login({ login, password });
+        const result = await userService.login({ login, password });
         if (result === true) {
-            UserService.login({ login, password });
             window.location.reload();
             toast({
                 title: "Login successful.",

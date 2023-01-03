@@ -12,13 +12,15 @@ import {
     Button,
     useDisclosure,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserService } from "../services/UserService";
+import { UserServiceContext } from "../App";
 
 const AvatarComponent = () => {
     const [mainUser, setMainUser] = useState("");
     const { isOpen, onOpen, onClose } = useDisclosure();
-
+    const userService = useContext(UserServiceContext);
+    
     useEffect(() => {
         const login = localStorage.getItem("mainUser");
         if (login) {
@@ -27,7 +29,7 @@ const AvatarComponent = () => {
     }, []);
 
     function handleLogout(event: any): void {
-        UserService.logout();
+        userService.logout();
         window.location.reload();
         onClose();
     }

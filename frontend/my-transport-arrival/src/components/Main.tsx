@@ -13,17 +13,18 @@ import {
     TabPanel,
 } from "@chakra-ui/react";
 import AvatarComponent from "./AvatarComponent";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserService } from "../services/UserService";
 import NotLoggedModal from "./NotLoggedModal";
 import DelayDashboard from "./DelayDashboard";
 import AddStops from "./AddStops";
+import { UserServiceContext } from "../App";
 
 const Main = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-   
+    const userService = useContext(UserServiceContext);
     useEffect(() => {
-        const isUserLoggedIn = UserService.isUserLoggedIn();
+        const isUserLoggedIn = userService.isUserLoggedIn();
         setIsLoggedIn(isUserLoggedIn);
       }, []);
    

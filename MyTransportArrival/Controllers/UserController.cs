@@ -1,9 +1,11 @@
 namespace MyTransportArrival.Controllers;
 
 using Abstractions.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 
+[Authorize]
 [Route("/api/users")]
 public class UserController : ControllerBase
 {
@@ -13,6 +15,7 @@ public class UserController : ControllerBase
     {
         _context = context;
     }
+    
     
     [HttpGet("current")]
     public IActionResult GetCurrent()

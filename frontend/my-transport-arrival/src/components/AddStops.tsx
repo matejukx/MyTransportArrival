@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, memo, useContext } from "react";
 import {
     Modal,
     ModalOverlay,
@@ -21,11 +21,13 @@ import { useToast } from "@chakra-ui/toast";
 import { Stop } from "../entities/Stop";
 import { StopService } from "../services/StopService";
 import { UserService } from "../services/UserService";
+import { UserServiceContext } from "../App";
 
 const AddStops = memo(() => {
     const [stopName, setStopName] = useState("");
     const [stops, setStops] = useState<Stop[]>([]);
     const [filteredStops, setFilteredStops] = useState<Stop[]>([]);
+    const userService = useContext(UserServiceContext);
     const toast = useToast();
     useEffect(() => {
         console.log("fetching stops");
@@ -45,7 +47,7 @@ const AddStops = memo(() => {
     };
 
     const handleStopSelection = (stop: Stop) => {
-        UserService.addStop(stop.stopId).then((result) => {
+        userService.addStop(stop.stopId).then((result) => {
             if (result) {
                 toast({
                     title: "Stop added",
