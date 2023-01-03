@@ -1,7 +1,6 @@
 namespace MyTransportArrival.Controllers;
 
 using Abstractions.Dto;
-using Abstractions.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -58,7 +57,9 @@ public class InitializeController : ControllerBase
             var stopEntity = new Stop
             {
                 StopId = stop.StopId,
-                StopName = stop.StopName
+                StopName = stop.StopName,
+                StopCode = stop.StopCode,
+                StopShortName = stop.StopShortName
             };
             _context.Stops.Add(stopEntity);
         }

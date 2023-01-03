@@ -1,0 +1,24 @@
+import { useEffect, useState } from "react";
+import { Stop } from "../entities/Stop";
+import { UserService } from "../services/UserService";
+import { Box, Flex, List, ListItem, SimpleGrid } from "@chakra-ui/react";
+import DelayItem from "./DelayItem";
+
+const DelayDashboard = () => {
+    const [stops, setStops] = useState<Stop[]>([]);
+    useEffect(() => {
+        UserService.getCurrentUserStops().then((stops) => setStops(stops));
+    }, []);
+
+    return (
+        <Box p={4} border="1px" borderColor="gray.200" rounded="lg" minH="400px">
+            <SimpleGrid columns={[1, 2, 3]} spacing={4}>
+                {stops.map((stop) => (
+                    <DelayItem stop={stop} />
+                ))}
+            </SimpleGrid>
+        </Box>
+    );
+};
+
+export default DelayDashboard;

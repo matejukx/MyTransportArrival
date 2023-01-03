@@ -17,5 +17,6 @@ app.UseAuthorization();
 app.UseAuthentication();
 app.MapControllers();
 app.UseSession();
+app.UseCors(config => config.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.Run();

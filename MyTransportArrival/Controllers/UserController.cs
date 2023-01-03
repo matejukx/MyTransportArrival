@@ -1,8 +1,6 @@
 namespace MyTransportArrival.Controllers;
 
 using Abstractions.Dto;
-using Abstractions.Entity;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 

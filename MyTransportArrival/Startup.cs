@@ -99,13 +99,16 @@ public class Startup
             o.AddSecurityRequirement(securityReq);
         });
        
-        services.AddSingleton<IConfigurationRoot>(Configuration);
+        services.AddSingleton(Configuration);
         services.AddHttpClient();
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IDelayService, DelayService>();
+        services.AddAutoMapper(config => config.AddProfile(typeof(AutomapperProfile)));
+        
         //services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("MyTransportArrival"));
         services.AddEntityFrameworkSqlite();
-        services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlite("Filename=MyTransportArrival.db"));
+        services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlite("Filename=MyTransportArrival2.db"));
         services.AddDistributedMemoryCache();
         services.AddSession(options =>
         {
@@ -121,6 +124,7 @@ public class Startup
                     policy.WithOrigins("*");
                 });
         });
+        
     }
 
     public void Configure(IApplicationBuilder app, IHostApplicationLifetime lifetime)
